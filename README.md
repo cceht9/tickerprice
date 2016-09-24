@@ -1,2 +1,4 @@
-# tickerprice
-Entering a valid ticker symbol returns its latest price 
+heroku-node
+===========
+
+Code for the tutorial by @sevilayha: Deploying Node Apps to Heroku
