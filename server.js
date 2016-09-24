@@ -23,23 +23,23 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req,res) {
-	var form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm();
     var yahooService = function (err, fields) {
 		res.writeHead(200, {
     		'content-type': 'text/plain'
 		});
     	var price;
     	var displayPrice = function (error, response, body) {
-			if (!error && response.statusCode == 200) {
-			  	body = body.split("\n");
-			  	body = body[1].split(",");
-			  	price = body[6];
-			  	res.write('The Stock price of ' + fields.symbol.toUpperCase() + ' is: ' + price);
-		  	} else {
-		  		res.write("Please enter a valid ticker symbol");
-		  	}
-		  	res.end();
-		}
+		if (!error && response.statusCode == 200) {
+		  	body = body.split("\n");
+		  	body = body[1].split(",");
+		  	price = body[6];
+		  	res.write('The Stock price of ' + fields.symbol.toUpperCase() + ' is: ' + price);
+	  	} else {
+	  		res.write("Please enter a valid ticker symbol");
+	  	}
+	  	res.end();
+	}
     	request('http://ichart.finance.yahoo.com/table.csv?s=' + fields.symbol, displayPrice);
 	}
     form.parse(req, yahooService);
